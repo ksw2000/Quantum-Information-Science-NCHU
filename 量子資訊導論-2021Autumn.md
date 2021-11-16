@@ -93,7 +93,7 @@ tags: 大四
 > 一個完整功能的量子電腦可能代表RSA和其他的加密協定的結束(原計算條件改變)
 > → 利用量子加密
 > 
-> {後量子密碼學|Post-quantum cryptography}：在傳統電腦上想辦法發明一個演算法不讓量子電腦能破解發明一個演算法不讓量子電腦能破解(無條件安全)
+> {後量子密碼學|Post-quantum cryptography}：在傳統電腦上想辦法發明一個演算法不讓量子電腦能破解(無條件安全)
 
 <!-- 
 $$
@@ -113,7 +113,7 @@ A single quantum bit is a linear combination of a two level quantum system: {"ze
 
 $$
 |\psi\rangle = \alpha |0\rangle +\beta|1\rangle\\
-\text{where } (\alpha, \beta)\in C^2
+\text{where } (\alpha, \beta)\in C^2 and\ \alpha^2 + \beta^2 = 1
 $$
 
 
@@ -130,7 +130,7 @@ $$
 ### outer product
 
 $$
-|abc\rangle \langle def| = |abc\times def|=\begin{bmatrix}d \\ e \\ f\end{bmatrix}\begin{bmatrix}a & b &c\end{bmatrix} = \begin{bmatrix}da & db & dc\\ea & eb & ec\\ fa & fb & fc\end{bmatrix}
+|def\rangle \langle abc | = |def\times abc|=\begin{bmatrix}d \\ e \\ f\end{bmatrix}\begin{bmatrix}a & b &c\end{bmatrix} = \begin{bmatrix}da & db & dc\\ea & eb & ec\\ fa & fb & fc\end{bmatrix}
 $$
 
 ### Z basis
@@ -172,10 +172,10 @@ $$
 
 ### Y basis
 
-
+<!--
 
 > 先做 X 再做 Z 會等於 Y 
-> 
+> -->
 
 ### Multiples qubits
 
@@ -291,9 +291,11 @@ $$
 
 ### Controlled-NOT gate
 
-![](https://i.imgur.com/pVL93B3.png =400x)
+![](https://i.imgur.com/pVL93B3.png =300x)
 
-可以用傳統電路來想 `x->x` `y->x^y`
+> 可以用傳統電路來想 `x->x` `y->x^y`
+> x: control bit
+> y: target bit
 
 $$
 CN\equiv\begin{bmatrix}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0\end{bmatrix}
@@ -304,9 +306,16 @@ $$
 > 2. 用傳統電路思考做兩次 xor 等於沒做
 <!--[](https://i.imgur.com/CaJO1Sj.png)-->
 
+**Positive control-not gate & Negative control-not gate**
+
++ positive(實心點): control 是 1 時才更動 target
++ negative(空心點): control 是 0 時才更動 target
+
+![](https://i.imgur.com/LJfdZvn.png =400x)
+
 ### Hadmard 與 Controlled-Not 混合電路
 
-![](https://i.imgur.com/XJjKp0q.png)
+![](https://i.imgur.com/XJjKp0q.png =400x)
 
 先計算
 $$
@@ -321,8 +330,178 @@ $$-->
 
 ![](https://i.imgur.com/daWrSHl.png)
 
+### Toffoli gate
+
+![](https://i.imgur.com/I77hGIB.png)
+
+aka control control not (CCNOT)
+
+$$
+\begin{bmatrix}1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\
+0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
+\end{bmatrix}
+$$
+
+|in | in | in |out | out | out |
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|0|0|0|0|0|0| 
+|0|0|1|0|0|1|
+|0|1|0|0|1|0|
+|0|1|1|0|1|1|
+|1|0|0|1|0|0|
+|1|0|1|1|0|1|
+|1|1|**0**|1|1|**1**|
+|1|1|**1**|1|1|**0**|
+
+只有當兩個 control 同時為 1 時，target 才為被反轉
+
+### swap gate
+
+![](https://i.imgur.com/vBOjHQf.png =300x)
+
+input: (a, b) output: (b, a)
+
+### Fredkin gate
+
+![](https://i.imgur.com/EamKc2l.png =100x)
+
+僅有 control bit 是 1 時會使 swap gate 做交換
+
 ## Change of Basis
 
+$$
+|++\rangle= \begin{bmatrix}\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}\end{bmatrix} \otimes \begin{bmatrix}\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}\end{bmatrix}=\begin{bmatrix}\frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2}\end{bmatrix}
+$$
+
+$$
+|--\rangle= \begin{bmatrix}\frac{1}{\sqrt{2}}\\\frac{-1}{\sqrt{2}}\end{bmatrix} \otimes \begin{bmatrix}\frac{1}{\sqrt{2}}\\\frac{-1}{\sqrt{2}}\end{bmatrix}=\begin{bmatrix}\frac{1}{2} \\ \frac{-1}{2} \\ \frac{-1}{2} \\ \frac{1}{2}\end{bmatrix}
+$$
+
+$$
+|+-\rangle= \begin{bmatrix}\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}\end{bmatrix} \otimes \begin{bmatrix}\frac{1}{\sqrt{2}}\\\frac{-1}{\sqrt{2}}\end{bmatrix}=\begin{bmatrix}\frac{1}{2} \\ \frac{-1}{2} \\ \frac{1}{2} \\ \frac{-1}{2}\end{bmatrix}
+$$
+
+
+$$
+|-+\rangle= \begin{bmatrix}\frac{1}{\sqrt{2}}\\\frac{-1}{\sqrt{2}}\end{bmatrix} \otimes \begin{bmatrix}\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}\end{bmatrix}=\begin{bmatrix}\frac{1}{2} \\ \frac{1}{2} \\ \frac{-1}{2} \\ \frac{-1}{2}\end{bmatrix}
+$$
+
+$$
+|\psi^+\rangle=\frac{1}{\sqrt{2}}\begin{bmatrix}1 \\ 0 \\ 0 \\ 1\end{bmatrix}=a\begin{bmatrix}\frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2} \\ \frac{1}{2}\end{bmatrix}+b\begin{bmatrix}\frac{1}{2} \\ \frac{-1}{2} \\ \frac{-1}{2} \\ \frac{1}{2}\end{bmatrix} + c \begin{bmatrix}\frac{1}{2} \\ \frac{-1}{2} \\ \frac{1}{2} \\ \frac{-1}{2}\end{bmatrix} + d \begin{bmatrix}\frac{1}{2} \\ \frac{1}{2} \\ \frac{-1}{2} \\ \frac{-1}{2}\end{bmatrix}
+$$
+
+![](https://i.imgur.com/kWb9qtq.png)
+
+## No-cloning Theorem (會考證明)
+
+量子不可複製理論
+
+![](https://i.imgur.com/3CQld6E.png =300x)
+
+
+![](https://i.imgur.com/ujLJa4B.png)
+
+![](https://media.discordapp.net/attachments/863362246121619489/909695944604413952/week7_Quantum_gatesCircuits-21.jpg?width=667&height=472)
+
+## Quantum Circuits
+
+### Half-adder
+
+| a | b | c | s |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 0 | 1 | 0 | 1 |
+| 1 | 0 | 0 | 1 |
+| 1 | 1 | 1 | 0 |
+
+
+![](https://i.imgur.com/EBlPRCL.png =150x)
+
+
+### Full-adder
+
+|c<sub>in</sub>| a | b | c<sub>out</sub> | s |
+|:---:|:---:|:---:|:---:|---:|
+| 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 0 | 1 |
+| 0 | 1 | 0 | 0 | 1 |
+| 0 | 1 | 1 | 1 | 0 |
+| 1 | 0 | 0 | 0 | 1 |
+| 1 | 0 | 1 | 1 | 0 |
+| 1 | 1 | 0 | 1 | 0 |
+| 1 | 1 | 1 | 1 | 1 |
+
+![](https://i.imgur.com/5yyh4Gp.png =300x) 
+電路合成問題是個 Open problem
+
+
+### Reversible Circuit
+
+![](https://i.imgur.com/UTl8Jc3.png)
+
+可逆電路好處：能量不會浪費，用數學來說就是要做到 one-to-one and onto
+
+**Example**
+以半加法器來舉例，為了形成 reversible circuit 將真值表補齊
+
+<style>
+    .red{color:red}
+    .orange{color:orange}
+    .cyan{color:cyan}
+    .blue{color:blue}
+    .green{color:green}
+</style>
+> 1. 檢查是否有重複輸出，如果沒有就不用再補 output
+> ![](https://i.imgur.com/K4HMbSO.png =400x)
+> 2. 補完 input 補到 $2^3$ 種輸入
+> ![](https://i.imgur.com/Qy6agXT.png =400x)
+> 重點是要怎麼補呢？可以把狀態圖畫出來
+> + Hard link: 原本有的(黑色實線)
+> + Soft link: 自己加的(綠色虛線)
+>
+>| 選擇I | 選擇II |
+>|:-------:|:--------:|
+>|![](https://i.imgur.com/rLH4zRL.png =300x)|![](https://i.imgur.com/CdV5RJR.png =250x)|
+> 
+> 我們以 **選擇II** 來舉例
+> ![](https://i.imgur.com/gW06bHU.png =400x)
+> 
+> 3. 最難的部分在四個狀態 cycle 的部分，其中一個方法是先選擇讓一條線斷掉
+> * **單個**成一cycle**不理會**
+> * **兩個**成一cycle**想成互換**
+> * **三個以上**成一cycle : 
+    > 想辦法做**互換**動作，以達成最終目標 
+    > 選擇其中一條線斷掉(**斷狀態差最多**的那個)
+    > 開始互換
+    > 
+>| 原先狀態 | 切斷狀態 |
+>|:-------:|:---------:|
+>|![](https://i.imgur.com/Kp4PAir.png =400x)| ![](https://i.imgur.com/b9pxEws.png =400x)|
+>
+> 4. 討論 bit 間的差距，只差一個 bit 稱相鄰，差超過一個 bit 稱不相鄰，不相鄰的的 state 需要先換成相鄰的
+> >+ <span class="red">(0**1**1, 0**0**1)</span> 相鄰
+> >+ <span class="green">(**00**1, **11**1)</span> 不相鄰
+> >+ <span class="blue">(1**1**1, 1**0**1) 相鄰
+> 
+> <span class="green">(**00**1, **11**1)</span></span> 可以改成
+> > (001, 011, 111) 或 (001, 101, 111)
+> 
+> 我們以前者做舉例，要達成前者，可以利用 3 次兩兩交換的方式來實作
+> 
+>  
+> 5. 將最複雜的部分轉成邏輯闡 (其他自己連自己的狀態不用處理)並進行化簡
+> C=<span class="red">(011,001)</span><span class="green">(001,011)(011,111)(001,011)</span><span class="blue">(111,101)</span>
+> ![](https://i.imgur.com/RE65lFz.png =400x)
+
+### Reduction
+
+![](https://i.imgur.com/uztimHP.png)
 
 
 ---
@@ -331,65 +510,21 @@ $$-->
 
 ---
 
-:::spoiler
-波紋疾走 
-
-![](https://i.imgur.com/CjCqyeA.png)
-
-![](https://i.imgur.com/HoddLoP.png)
-
-觀測量子導致疊加態崩壞，與{原子崩壞|Melt Downer}原理類似
-
-电子与光一样可因应状况，显示出“粒子”与“波形”两者的性质，{麥野沈利|むぎの しずり} ({超能力者|Level5}第4名)则拥有能强制操纵介于两者之间“暧昧状况电子”的能力（发射出来的既不是电波也不是粒子，而是电子本身）。像这种“暧昧状况下固定的电子”就算撞击到物体，由于无法决定会呈现“粒子”与“波形”任何一方的反应，就会“滞留”于当场。原本电子只拥有无限接近于零的质量，但这种“滞留”的效力会成为拟似障壁，这道障壁会以释放时的速度，以可怕的威力撞击到目标上。
-
-
-![](https://i.imgur.com/kCLBTJF.png)
-
-
-
-## {Markdown 語法練習區 | 驚不驚喜，意不意外}
-
-{超電磁砲|ReLUgun}、{一方通行|Accelerator}
-
-{外裝代腦|Exterior}、{樹行圖設計者|Tree Diagram}
-
-{AIM擴散力場|An Invountary Movement}
-
-{超能力者|Level5}
-
-{風紀委員|Judgement}、{警備員|Anti-Skill}
-
-{幻想御手|Level Upper}
-
-{御坂妹妹|Sisters}
-
-{星爆氣流斬|Starburst Stream}
-
-{右眼的封印|Code  871}
-
-![](https://i.imgur.com/R0XRpki.png)
-
-<img src="https://i.imgur.com/0ajdcm6.jpg" class="センター">
-
----
-
-## 廣告
-
-![](https://i.imgur.com/wnnoK46.png)
-
-
-
-不同角度的光比如 僕たちはひとつの光
-
-
-![](https://i.imgur.com/MMfT994.png)
-
-:::
+https://hackmd.io/@NCHU-CSE-111/r1HDsErIt
 
 ![](https://i.imgur.com/gk26URU.png)
 
 
-![](https://i.imgur.com/kWb9qtq.png)
-
 
 ![](https://i.imgur.com/YXcC7dS.jpg)
+
+
+## 作業 1
+
+![](https://i.imgur.com/kZHusrE.png)
+
+![](https://i.imgur.com/FEchaEQ.png)
+
+## HandWritten Note 
+
+[Note](https://drive.google.com/file/d/1Eh-oPEheF8LBqMk98FibHptLA16fYgn_/view?usp=sharing)
