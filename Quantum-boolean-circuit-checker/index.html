@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quantum boolean circuit checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <span class="mdc-top-app-bar__title">Quantum boolean circuit checker</span>
+            </section>
+        </div>
+    </header>
+    <main class="mdc-top-app-bar--fixed-adjust routing-content">
+        <div class="half-parent">
+            <div class="half">
+                <p class="mdc-typography--overline bigger">Input</p>
+                <label
+                    class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--no-label">
+                    <span class="mdc-notched-outline">
+                        <span class="mdc-notched-outline__leading"></span>
+                        <span class="mdc-notched-outline__trailing"></span>
+                    </span>
+                    <span class="mdc-text-field__resizer">
+                        <textarea id="raw-circuit" class="mdc-text-field__input" rows="8" cols="40"
+                            aria-label="Label"></textarea>
+                    </span>
+                </label>
+                <div class="button-group">
+                    <button id="btn-run-example" class="mdc-button mdc-button--outlined">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Example</span>
+                    </button>
+                    <button id="btn-run" class="mdc-button mdc-button--raised">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Run</span>
+                    </button>
+                </div>
+                <ul class="mdc-typography--body2">
+                    <li>B: Black control bit (high level trigger)</li>
+                    <li>W: White control bit (low level trigger)</li>
+                    <li>N: Not-gate</li>
+                    <li>E: Empty (Wire)</li>
+                    <li>Otherwise: omit</li>
+                </ul>
+            </div>
+            <div class="half mdc-typography--body2">
+                <div>
+                    <p class="mdc-typography--overline bigger">Circuit</p>
+                    <div id="canvas-parent">
+                        <canvas id="circuit-preview"></canvas>
+                    </div>
+                    <button id="btn-save-photo" class="mdc-button mdc-button--icon-leading"
+                        style="display:block; margin: 10px auto;">
+                        <span class="mdc-button__ripple"></span>
+                        <i class="material-icons mdc-button__icon" aria-hidden="true">download</i>
+                        <span class="mdc-button__label">save photo</span>
+                    </button>
+                </div>
+                <p class="mdc-typography--overline bigger">Result</p>
+                <table id="truth-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">Input</th>
+                            <th style="width: 50%;">Output</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <aside class="mdc-snackbar">
+        <div class="mdc-snackbar__surface" role="status" aria-relevant="additions">
+            <div class="mdc-snackbar__label" aria-atomic="false">
+                Input Error!
+            </div>
+        </div>
+    </aside>
+</body>
+
+</html>
