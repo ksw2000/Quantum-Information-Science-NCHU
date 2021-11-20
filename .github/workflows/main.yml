@@ -32,7 +32,7 @@ jobs:
           git init
           git config user.name  "CI"
           git config user.email "ci@github.com"
-          git remote add secure-origin https://${{ secrets.CI }}@github.com/liao2000/liao2000.github.io
+          git remote add secure-origin https://${{ secrets.CI }}@github.com/liao2000/Quantum-Information-Science-NCHU
           git checkout -b gh-pages
           git add .
           git commit -m "Update quantum boolean circuit checker"
