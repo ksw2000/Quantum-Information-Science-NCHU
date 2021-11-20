@@ -17,23 +17,12 @@ const canvas = document.getElementById("circuit-preview");
 // circuit: 1d array
 function calcUnit(input, circuit) {
     var output = Array.from(input);
-
-    if (input.length != circuit.length) {
-        throw ('circuit error');
-    }
-
     var reverse = true;
-    //var haveAtLeastOneCtrlGate = false;
     for (let i = 0; i < input.length; i++) {
         if (circuit[i] == highCtrl || circuit[i] == lowCtrl) {
-            //haveAtLeastOneCtrlGate = true;
             reverse = reverse && ((input[i] == 1 && circuit[i] == highCtrl) || (input[i] == 0 && circuit[i] == lowCtrl));
         }
     }
-
-    //if (!haveAtLeastOneCtrlGate) {
-    //    reverse = false;
-    //}
 
     if (reverse) {
         for (let i = 0; i < input.length; i++) {
@@ -177,8 +166,7 @@ function circuitRenderer(circuitList) {
 function run() {
     var rawCircuit = document.getElementById("raw-circuit").value;
     var circuit = translate(rawCircuit);
-    circuitRenderer(circuit);
-
+    
     // check circuit
     let len = 0;
     for (let i = 0; i < circuit.length; i++) {
@@ -186,10 +174,26 @@ function run() {
             len = circuit[i].length;
         } else if (circuit[i].length != len) {
             snackbar.open();
+            circuitRenderer([[]]);
+            tableRenderer(0, []);
             console.log("Input circuit error");
             return;
         }
+        let countNOTGate = 0;
+        for (let j = 0; j < len; j++) {
+            if (circuit[i][j] == target) {
+                countNOTGate++;
+            }
+        }
+        if(countNOTGate != 1){
+            snackbar.open();
+            circuitRenderer([[]]);
+            tableRenderer(0, []);
+            return;
+        }
     }
+
+    circuitRenderer(circuit);
 
     let trueTableLen = 1 << len; // 2 ^ len
     let outputs = [];
