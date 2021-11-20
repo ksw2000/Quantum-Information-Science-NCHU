@@ -23,17 +23,17 @@ function calcUnit(input, circuit) {
     }
 
     var reverse = true;
-    var haveAtLeastOneCtrlGate = false;
+    //var haveAtLeastOneCtrlGate = false;
     for (let i = 0; i < input.length; i++) {
         if (circuit[i] == highCtrl || circuit[i] == lowCtrl) {
-            haveAtLeastOneCtrlGate = true;
+            //haveAtLeastOneCtrlGate = true;
             reverse = reverse && ((input[i] == 1 && circuit[i] == highCtrl) || (input[i] == 0 && circuit[i] == lowCtrl));
         }
     }
 
-    if (!haveAtLeastOneCtrlGate) {
-        reverse = false;
-    }
+    //if (!haveAtLeastOneCtrlGate) {
+    //    reverse = false;
+    //}
 
     if (reverse) {
         for (let i = 0; i < input.length; i++) {
