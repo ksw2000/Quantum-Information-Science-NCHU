@@ -126,12 +126,25 @@ function circuitRenderer(circuitList) {
     }
 
     // draw vertical lines
-    circuitList[0].length * girdSize;
-    for (let j = 0; j < circuitList.length; j++) {
-        ctx.moveTo(deltaX + j * girdSize, deltaY);
-        ctx.lineTo(deltaX + j * girdSize, circuitList[0].length * girdSize - deltaY);
-        ctx.stroke();
-    }
+    circuitList.forEach((circuit, i) => {
+        // save the position of gate for drawing vertical line
+        let gatePosition = [];
+        circuit.forEach((gate, j) => {
+            switch (gate) {
+                case target:
+                case lowCtrl:
+                case highCtrl:
+                    gatePosition.push(j);
+                    break;
+            }
+        });
+        if (gatePosition.length > 1) {
+            ctx.moveTo(deltaX + i * girdSize, gatePosition[0] * girdSize + deltaY);
+            ctx.lineTo(deltaX + i * girdSize, gatePosition[gatePosition.length - 1] * girdSize + deltaY);
+            ctx.stroke();
+        }
+    });
+
 
     // draw gates
     circuitList.forEach((circuit, i) => {
@@ -166,7 +179,7 @@ function circuitRenderer(circuitList) {
 function run() {
     var rawCircuit = document.getElementById("raw-circuit").value;
     var circuit = translate(rawCircuit);
-    
+
     // check circuit
     let len = 0;
     for (let i = 0; i < circuit.length; i++) {
@@ -185,7 +198,7 @@ function run() {
                 countNOTGate++;
             }
         }
-        if(countNOTGate != 1){
+        if (countNOTGate != 1) {
             snackbar.open();
             circuitRenderer([[]]);
             tableRenderer(0, []);
