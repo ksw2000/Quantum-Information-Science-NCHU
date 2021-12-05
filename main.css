@@ -1,0 +1,117 @@
+:root {
+    --mdc-theme-primary: #171213;
+    --mdc-theme-secondary: #018786;
+    --mdc-theme-background: #d8d8d8;
+    --mdc-theme-surface: #fff;
+    --mdc-theme-error: #f77070;
+    --mdc-theme-on-primary: #fff;
+    --mdc-theme-on-secondary: #fff;
+    --mdc-theme-on-surface: #000;
+    --mdc-theme-on-error: #fff;
+    --mdc-theme-text-primary-on-background: rgba(0, 0, 0, 0.87);
+    --mdc-theme-text-secondary-on-background: rgba(0, 0, 0, 0.54);
+    --mdc-theme-text-hint-on-background: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-disabled-on-background: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-icon-on-background: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);
+    --mdc-theme-text-secondary-on-light: rgba(0, 0, 0, 0.54);
+    --mdc-theme-text-hint-on-light: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-icon-on-light: rgba(0, 0, 0, 0.38);
+    --mdc-theme-text-primary-on-dark: white;
+    --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
+    --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
+    --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
+    --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5)
+}
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    box-sizing: border-box;
+    display: block;
+    margin: 0px auto;
+    max-width: 1000px;
+    padding: 0px 20px;
+    width: 100%;
+}
+
+p {
+    padding: 0px;
+    margin: 0px;
+}
+
+.half-parent {
+    display: flex;
+    margin: 0px auto;
+}
+
+.half {
+    box-sizing: border-box;
+    padding: 0px 5px;
+    margin: 0px auto;
+    width: 50%;
+}
+
+.bigger {
+    font-size: 1rem;
+    line-height: 2rem;
+    color: var(--mdc-theme-secondary);
+}
+
+/*override width*/
+.mdc-text-field--textarea {
+    width: 100%;
+}
+
+.button-group {
+    text-align: right;
+    padding: 10px 0px;
+}
+
+#canvas-parent {
+    margin: 10px auto;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 750px) {
+    .half-parent {
+        flex-direction: column;
+    }
+
+    .half {
+        width: 100%;
+    }
+
+    main{
+        padding: 0px 5px;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    width: 100%;
+}
+
+tr {
+    color: var(--mdc-theme-primary);
+    text-align: center;
+}
+
+th {
+    background-color: var(--mdc-theme-primary);
+    color: var(--mdc-theme-on-primary);
+}
+
+td, th {
+    border: 1px solid var(--mdc-theme-primary);
+    padding: 5px 0px;
+    outline: 0px;
+}
